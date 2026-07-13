@@ -67,8 +67,9 @@ In each environment, configure:
 Required secrets:
 
 - `GOOGLE_CLIENT_ID`
-- `DEV_DEPLOY_WEBHOOK_URL` (development)
 - `PROD_DEPLOY_WEBHOOK_URL` (production)
+- `NETLIFY_AUTH_TOKEN` (development, for QA frontend deploy)
+- `NETLIFY_QA_SITE_ID` (development, Netlify site id)
 
 Optional variables:
 
@@ -78,3 +79,32 @@ Optional variables:
 - `VITE_API_BASE_URL`
 
 The workflow builds the app with environment-specific values and then calls the environment webhook to trigger deployment in your hosting platform.
+
+## 4) QA frontend deploy on Netlify
+
+QA frontend deploy is handled by [ .github/workflows/deploy-frontend-qa-netlify.yml ](.github/workflows/deploy-frontend-qa-netlify.yml).
+
+Trigger:
+
+- push to `develop`
+- manual run from Actions (`workflow_dispatch`)
+
+What it does:
+
+- builds only frontend assets using Vite development mode
+- deploys `dist/public` to Netlify with alias `qa`
+
+Required GitHub environment secrets (development):
+
+- `NETLIFY_AUTH_TOKEN`
+- `NETLIFY_QA_SITE_ID`
+
+Recommended GitHub environment variables (development):
+
+- `VITE_API_BASE_URL` (your QA backend URL)
+- `VITE_GOOGLE_CLIENT_ID` (QA Google OAuth client id)
+
+Notes:
+
+- Keep a separate Google OAuth client id for QA vs production.
+- If your backend deploy is not webhook-based, you can remove `PROD_DEPLOY_WEBHOOK_URL` and align deploy steps to your backend platform.

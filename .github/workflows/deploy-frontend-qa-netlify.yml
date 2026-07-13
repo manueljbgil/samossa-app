@@ -1,0 +1,56 @@
+name: Deploy Frontend QA to Netlify
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+concurrency:
+  group: netlify-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-qa-frontend:
+    name: Deploy QA Frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: development
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend for QA
+        run: npx vite build --mode development
+        env:
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || '' }}
+          VITE_GOOGLE_CLIENT_ID: ${{ vars.VITE_GOOGLE_CLIENT_ID || secrets.GOOGLE_CLIENT_ID }}
+
+      - name: Deploy to Netlify QA
+        run: |
+          if [ -z "${NETLIFY_AUTH_TOKEN}" ]; then
+            echo "NETLIFY_AUTH_TOKEN is not set."
+            exit 1
+          fi
+          if [ -z "${NETLIFY_QA_SITE_ID}" ]; then
+            echo "NETLIFY_QA_SITE_ID is not set."
+            exit 1
+          fi
+          npx netlify deploy \
+            --dir=dist/public \
+            --site="$NETLIFY_QA_SITE_ID" \
+            --alias=qa \
+            --message "QA deploy ${GITHUB_SHA}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_QA_SITE_ID: ${{ secrets.NETLIFY_QA_SITE_ID }}
