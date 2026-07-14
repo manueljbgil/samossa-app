@@ -45,7 +45,7 @@ function ThemeToggle() {
       type="button"
       size="icon"
       variant="ghost"
-      className="h-9 w-9 xs:h-10 xs:w-10"
+      className="h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 md:h-11 md:w-11"
       onClick={() => setDark((d) => !d)}
       aria-label="Toggle dark mode"
       data-testid="button-theme-toggle"
@@ -85,23 +85,26 @@ export function AppShell({ children }: { children: ReactNode }) {
     <AppShellContext.Provider value={contextValue}>
       <div className="min-h-screen flex flex-col bg-background text-foreground">
         <header className="sticky top-0 z-30 border-b border-card-border bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-          <div className="mx-auto flex w-full max-w-[var(--app-shell-max-width)] items-center justify-between px-[var(--app-header-pad-x)] py-[var(--app-header-pad-y)]">
+          <div className="mx-auto flex w-full max-w-[var(--app-shell-max-width)] items-center justify-between px-[var(--app-header-pad-x)] py-[var(--app-header-pad-y)] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl">
             <Link
               href="/"
-              className="flex items-center gap-1.5 text-primary xs:gap-2"
+              className="flex items-center gap-1 text-primary xs:gap-1.5 sm:gap-2 md:gap-2.5"
               data-testid="link-home"
             >
-              <Logo size={24} className="sm:h-7 sm:w-7" />
+              <Logo
+                size={24}
+                className="h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 md:h-8 md:w-8"
+              />
               <div className="leading-tight">
-                <div className="font-display text-base font-semibold tracking-tight text-foreground xs:text-lg">
+                <div className="font-display text-sm font-semibold tracking-tight text-foreground xs:text-base sm:text-lg md:text-xl">
                   Samosa Map
                 </div>
-                <div className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground xs:block">
+                <div className="hidden text-[9px] uppercase tracking-[0.16em] text-muted-foreground xs:block sm:text-[10px] md:text-[11px]">
                   Rate your samosas
                 </div>
               </div>
             </Link>
-            <div className="flex items-center gap-0.5 xs:gap-1">
+            <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 md:gap-2">
               {headerAction}
               <ThemeToggle />
               {user ? (
@@ -113,11 +116,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                         location.startsWith("/profile") ? "secondary" : "ghost"
                       }
                       size="sm"
-                      className="gap-1 px-2 xs:gap-1.5 xs:px-3"
+                      className="gap-1 px-2 xs:gap-1.5 xs:px-2.5 sm:px-3 md:px-3.5 lg:px-4"
                       data-testid="link-profile"
                     >
-                      <User className="h-4 w-4" />
-                      <span className="hidden xs:inline sm:inline">
+                      <User className="h-3.5 w-3.5 xs:h-4 xs:w-4 md:h-[1.05rem] md:w-[1.05rem]" />
+                      <span className="hidden xs:inline max-w-20 truncate sm:max-w-24 md:max-w-32 lg:max-w-40 xl:max-w-none">
                         {user.displayName}
                       </span>
                     </Button>
@@ -126,7 +129,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="h-9 w-9 xs:h-10 xs:w-10"
+                    className="h-8 w-8 xs:h-9 xs:w-9 sm:h-10 sm:w-10 md:h-11 md:w-11"
                     onClick={() => logout()}
                     aria-label="Log out"
                     data-testid="button-logout"
@@ -139,11 +142,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <Button
                     type="button"
                     size="sm"
-                    className="gap-1 px-2 xs:gap-1.5 xs:px-3"
+                    className="gap-1 px-2 xs:gap-1.5 xs:px-2.5 sm:px-3 md:px-3.5 lg:px-4"
                     data-testid="link-auth"
                   >
-                    <LogIn className="h-4 w-4" />
-                    <span className="hidden xs:inline">Sign in</span>
+                    <LogIn className="h-3.5 w-3.5 xs:h-4 xs:w-4 md:h-[1.05rem] md:w-[1.05rem]" />
+                    <span className="hidden xs:inline md:inline">Sign in</span>
                   </Button>
                 </Link>
               )}
@@ -151,7 +154,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="mx-auto w-full max-w-[var(--app-shell-max-width)] flex-1 px-[var(--app-page-gutter)] pb-[var(--app-main-bottom-space)] sm:pb-0">
+        <main className="mx-auto w-full max-w-[var(--app-shell-max-width)] flex-1 px-[var(--app-page-gutter)] pb-[var(--app-main-bottom-space)] sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl sm:pb-0">
           {children}
         </main>
 

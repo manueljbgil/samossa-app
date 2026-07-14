@@ -650,7 +650,7 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
 
       {/* Rating dialog */}
       <Dialog open={ratingDialogOpen} onOpenChange={setRatingDialogOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="bottom-auto top-[50%] max-w-md max-h-[calc(100vh-2rem)] translate-y-[-50%] rounded-lg pb-6">
           <DialogHeader>
             <DialogTitle>Rate {place.name}</DialogTitle>
             <DialogDescription>
