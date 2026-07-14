@@ -33,7 +33,7 @@ jobs:
       - name: Build frontend for QA
         run: npx vite build --mode development
         env:
-          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || '' }}
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL || 'https://samossa-api-qa.fly.dev' }}
           VITE_GOOGLE_CLIENT_ID: ${{ vars.VITE_GOOGLE_CLIENT_ID || secrets.GOOGLE_CLIENT_ID }}
 
       - name: Deploy to Netlify QA
