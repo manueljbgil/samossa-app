@@ -13,12 +13,12 @@ export default function Auth() {
 
   return (
     <div className="mx-auto max-w-md">
-      <Card className="p-6">
-        <div className="mb-6">
-          <h1 className="font-display text-2xl font-semibold tracking-tight">
+      <Card className="p-4 xs:p-6">
+        <div className="mb-4 xs:mb-6">
+          <h1 className="font-display text-xl font-semibold tracking-tight xs:text-2xl">
             Sign in to Samosa Map
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-1 text-xs text-muted-foreground xs:text-sm">
             Rate the city's best samosas across Lisbon
           </p>
         </div>

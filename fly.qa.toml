@@ -8,6 +8,7 @@ primary_region = "fra"
   APP_ENV = "development"
   NODE_ENV = "production"
   SERVE_CLIENT = "false"
+  CORS_ALLOWED_ORIGINS = "https://qa--samosa-qa.netlify.app,http://localhost:3000"
   PORT = "3000"
   DATABASE_FILE = "/data/data.qa.db"
 

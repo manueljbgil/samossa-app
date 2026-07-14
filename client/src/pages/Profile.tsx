@@ -67,7 +67,7 @@ export default function Profile() {
       : 0;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4 xs:space-y-5">
       <div className="mt-2 hidden sm:block">
         <Button
           type="button"
@@ -82,12 +82,12 @@ export default function Profile() {
         </Button>
       </div>
 
-      <Card className="p-5">
+      <Card className="p-4 xs:p-5">
         <div className="text-xs uppercase tracking-wider text-muted-foreground">
           Profile
         </div>
         <h1
-          className="mt-1 font-display text-2xl font-semibold tracking-tight"
+          className="mt-1 font-display text-xl font-semibold tracking-tight xs:text-2xl"
           data-testid="text-display-name"
         >
           {user.displayName}
@@ -99,10 +99,10 @@ export default function Profile() {
           @{user.username}
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-4 border-t border-card-border pt-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-card-border pt-4 xs:mt-5 xs:gap-4">
           <div>
             <div
-              className="font-display text-3xl font-semibold tabular-nums"
+              className="font-display text-2xl font-semibold tabular-nums xs:text-3xl"
               data-testid="text-my-rating-count"
             >
               {ratings?.length ?? 0}
@@ -113,7 +113,7 @@ export default function Profile() {
           </div>
           <div className="text-right">
             <div
-              className="font-display text-3xl font-semibold tabular-nums"
+              className="font-display text-2xl font-semibold tabular-nums xs:text-3xl"
               data-testid="text-my-average"
             >
               {avg > 0 ? avg.toFixed(1) : "—"}
@@ -153,7 +153,7 @@ export default function Profile() {
                   className="cursor-pointer rounded-md border border-card-border bg-card p-4 hover-elevate active-elevate-2"
                   data-testid={`card-my-rating-${r.place.id}`}
                 >
-                  <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-col gap-3 xs:flex-row xs:items-start xs:justify-between">
                     <div className="min-w-0 flex-1">
                       <h3 className="truncate font-display text-base font-semibold">
                         {r.place.name}
@@ -167,7 +167,7 @@ export default function Profile() {
                         </p>
                       ) : null}
                     </div>
-                    <div className="flex flex-col items-end gap-1">
+                    <div className="flex flex-col gap-1 xs:items-end">
                       <RatingStars
                         value={r.score}
                         readOnly

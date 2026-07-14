@@ -260,7 +260,7 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
   const renderAddPlaceControls = () => (
     <>
       <Dialog open={isAddDialogOpen} onOpenChange={handleAddDialogOpenChange}>
-        <DialogContent className="sm:max-w-xl">
+        <DialogContent className="max-w-xl">
           <DialogHeader>
             <DialogTitle>Add a new place</DialogTitle>
             <DialogDescription>
@@ -412,13 +412,13 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
         </DialogContent>
       </Dialog>
       {isSelectingLocation && !isAddDialogOpen ? (
-        <div className="fixed left-1/2 bottom-[6.5rem] z-[70] -translate-x-1/2 sm:bottom-8">
+        <div className="fixed left-1/2 bottom-[var(--app-floating-offset)] z-[70] -translate-x-1/2 sm:bottom-8">
           <Button
             type="button"
             size="sm"
             onClick={() => void handleConfirmLocation()}
             disabled={isResolvingLocation}
-            className="gap-2 rounded-full px-4 py-2 shadow-xl shadow-primary/30"
+            className="gap-2 rounded-full px-[var(--app-confirm-button-pad-x)] py-[var(--app-confirm-button-pad-y)] text-[length:var(--app-confirm-button-font-size)] shadow-xl shadow-primary/30"
           >
             {isResolvingLocation
               ? "Looking up location..."
@@ -493,8 +493,8 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
       />
 
       {/* Detail card overlay (bottom-left) */}
-      <div className="absolute bottom-24 left-4 right-4 z-50 max-w-sm sm:bottom-8">
-        <Card className="p-5 max-h-[50vh] overflow-y-auto overflow-x-hidden overscroll-contain">
+      <div className="absolute bottom-[var(--app-floating-offset)] left-[var(--app-page-gutter)] right-[var(--app-page-gutter)] z-50 max-w-sm sm:bottom-8 sm:right-auto sm:w-[min(24rem,calc(100vw-2rem))]">
+        <Card className="max-h-[var(--app-detail-card-max-height)] overflow-y-auto overflow-x-hidden overscroll-contain p-4 xs:p-5 sm:max-h-[min(70vh,38rem)]">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 flex-wrap">
@@ -506,7 +506,7 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
                 </span>
               </div>
               <h1
-                className="mt-1 font-display text-2xl font-semibold tracking-tight line-clamp-2"
+                className="mt-1 font-display text-xl font-semibold tracking-tight line-clamp-2 xs:text-2xl"
                 data-testid="text-place-name"
               >
                 {place.name}
@@ -530,14 +530,14 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
             </Button>
           </div>
 
-          <p className="mt-3 text-sm leading-relaxed text-foreground/85 line-clamp-2">
+          <p className="mt-3 text-xs leading-relaxed text-foreground/85 line-clamp-2 xs:text-sm">
             {place.description}
           </p>
 
           <div className="mt-4 grid grid-cols-2 gap-3 border-t border-card-border pt-3">
             <div>
               <div
-                className="font-display text-2xl font-semibold tabular-nums"
+                className="font-display text-xl font-semibold tabular-nums xs:text-2xl"
                 data-testid="text-average-rating"
               >
                 {place.averageRating > 0 ? place.averageRating.toFixed(1) : "—"}
@@ -554,7 +554,7 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
             </div>
             <div className="text-right">
               <div
-                className="font-display text-2xl font-semibold tabular-nums"
+                className="font-display text-xl font-semibold tabular-nums xs:text-2xl"
                 data-testid="text-rating-count"
               >
                 {place.ratingCount}
@@ -603,7 +603,7 @@ export default function Place({ overrideId }: { overrideId?: number } = {}) {
             </div>
           ) : null}
 
-          <div className="mt-4 flex h-[24vh] flex-col border-t border-card-border pt-3 sm:h-[28vh]">
+          <div className="mt-4 flex h-[var(--app-detail-comments-height)] flex-col border-t border-card-border pt-3 sm:h-[28vh]">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Comments
             </h2>

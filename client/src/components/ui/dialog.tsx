@@ -41,7 +41,7 @@ const DialogContent = React.forwardRef<
       ref={ref}
       className={cn(
         // Mobile: anchored to bottom, can overlap bottom nav. Desktop (sm+) stays centered.
-        "fixed left-1/2 bottom-0 z-50 grid w-full max-w-lg max-h-[60vh] translate-x-[-50%] gap-4 border bg-background p-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:left-[50%] sm:top-[50%] sm:translate-y-[-50%] sm:translate-x-[-50%] sm:max-h-[calc(100vh-5rem)] sm:rounded-lg overflow-y-auto",
+        "fixed left-1/2 bottom-0 z-50 grid w-[calc(100vw-(var(--app-page-gutter)*2))] max-w-lg max-h-[min(75vh,42rem)] translate-x-[-50%] gap-4 rounded-t-[1.25rem] border bg-background p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-lg duration-200 overflow-y-auto data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] xs:p-5 xs:pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:left-[50%] sm:top-[50%] sm:w-full sm:translate-y-[-50%] sm:translate-x-[-50%] sm:max-h-[calc(100vh-5rem)] sm:rounded-lg sm:p-6 sm:pb-6",
         className,
       )}
       {...props}

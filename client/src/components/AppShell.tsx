@@ -45,6 +45,7 @@ function ThemeToggle() {
       type="button"
       size="icon"
       variant="ghost"
+      className="h-9 w-9 xs:h-10 xs:w-10"
       onClick={() => setDark((d) => !d)}
       aria-label="Toggle dark mode"
       data-testid="button-theme-toggle"
@@ -84,23 +85,23 @@ export function AppShell({ children }: { children: ReactNode }) {
     <AppShellContext.Provider value={contextValue}>
       <div className="min-h-screen flex flex-col bg-background text-foreground">
         <header className="sticky top-0 z-30 border-b border-card-border bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-          <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-4 py-3">
+          <div className="mx-auto flex w-full max-w-[var(--app-shell-max-width)] items-center justify-between px-[var(--app-header-pad-x)] py-[var(--app-header-pad-y)]">
             <Link
               href="/"
-              className="flex items-center gap-2 text-primary"
+              className="flex items-center gap-1.5 text-primary xs:gap-2"
               data-testid="link-home"
             >
-              <Logo size={28} />
+              <Logo size={24} className="sm:h-7 sm:w-7" />
               <div className="leading-tight">
-                <div className="font-display text-lg font-semibold tracking-tight text-foreground">
+                <div className="font-display text-base font-semibold tracking-tight text-foreground xs:text-lg">
                   Samosa Map
                 </div>
-                <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                <div className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground xs:block">
                   Rate your samosas
                 </div>
               </div>
             </Link>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5 xs:gap-1">
               {headerAction}
               <ThemeToggle />
               {user ? (
@@ -112,11 +113,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                         location.startsWith("/profile") ? "secondary" : "ghost"
                       }
                       size="sm"
-                      className="gap-1.5"
+                      className="gap-1 px-2 xs:gap-1.5 xs:px-3"
                       data-testid="link-profile"
                     >
                       <User className="h-4 w-4" />
-                      <span className="hidden sm:inline">
+                      <span className="hidden xs:inline sm:inline">
                         {user.displayName}
                       </span>
                     </Button>
@@ -125,6 +126,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                     type="button"
                     variant="ghost"
                     size="icon"
+                    className="h-9 w-9 xs:h-10 xs:w-10"
                     onClick={() => logout()}
                     aria-label="Log out"
                     data-testid="button-logout"
@@ -137,11 +139,11 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <Button
                     type="button"
                     size="sm"
-                    className="gap-1.5"
+                    className="gap-1 px-2 xs:gap-1.5 xs:px-3"
                     data-testid="link-auth"
                   >
                     <LogIn className="h-4 w-4" />
-                    Sign in
+                    <span className="hidden xs:inline">Sign in</span>
                   </Button>
                 </Link>
               )}
@@ -149,36 +151,36 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="mx-auto w-full max-w-3xl flex-1 px-4 pb-24 sm:pb-0">
+        <main className="mx-auto w-full max-w-[var(--app-shell-max-width)] flex-1 px-[var(--app-page-gutter)] pb-[var(--app-main-bottom-space)] sm:pb-0">
           {children}
         </main>
 
         {/* Mobile bottom nav for quick reach */}
-        <nav className="fixed bottom-[1.75rem] left-1/2 z-40 w-[calc(100%-1rem)] max-w-[20rem] -translate-x-1/2 rounded-full border border-border/50 bg-background/70 px-1.5 py-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.10)] backdrop-blur-2xl sm:hidden">
+        <nav className="fixed left-1/2 z-40 w-[var(--app-bottom-nav-width)] max-w-[var(--app-bottom-nav-max-width)] -translate-x-1/2 rounded-full border border-border/50 bg-background/70 px-[var(--app-bottom-nav-pad)] py-[var(--app-bottom-nav-pad)] shadow-[0_10px_30px_rgba(0,0,0,0.10)] backdrop-blur-2xl bottom-[var(--app-bottom-nav-bottom)] sm:hidden">
           <div className="flex items-stretch">
             <Link href="/" className="flex-1">
               <div
-                className={`flex flex-col items-center justify-center gap-0.5 rounded-full px-2.5 py-1.5 text-[10px] font-medium transition-all ${
+                className={`flex flex-col items-center justify-center gap-[var(--app-bottom-nav-item-gap)] rounded-full px-[var(--app-bottom-nav-item-pad-x)] py-[var(--app-bottom-nav-item-pad-y)] text-[length:var(--app-bottom-nav-item-font-size)] font-medium leading-none transition-all ${
                   location === "/"
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:bg-accent/70 hover:text-foreground"
                 }`}
                 data-testid="nav-map"
               >
-                <Map className="h-4 w-4" />
+                <Map className="h-[var(--app-bottom-nav-icon-size)] w-[var(--app-bottom-nav-icon-size)]" />
                 Map
               </div>
             </Link>
             <Link href={user ? "/profile" : "/auth"} className="flex-1">
               <div
-                className={`flex flex-col items-center justify-center gap-0.5 rounded-full px-2.5 py-1.5 text-[10px] font-medium transition-all ${
+                className={`flex flex-col items-center justify-center gap-[var(--app-bottom-nav-item-gap)] rounded-full px-[var(--app-bottom-nav-item-pad-x)] py-[var(--app-bottom-nav-item-pad-y)] text-[length:var(--app-bottom-nav-item-font-size)] font-medium leading-none transition-all ${
                   location.startsWith("/profile") || location === "/auth"
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:bg-accent/70 hover:text-foreground"
                 }`}
                 data-testid="nav-profile"
               >
-                <User className="h-4 w-4" />
+                <User className="h-[var(--app-bottom-nav-icon-size)] w-[var(--app-bottom-nav-icon-size)]" />
                 {user ? "Profile" : "Sign in"}
               </div>
             </Link>

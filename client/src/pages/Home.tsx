@@ -157,14 +157,14 @@ export default function Home() {
   // selection is driven by the router path (navigate("/:id"))
 
   return (
-    <div className="space-y-5">
-      <section className="space-y-3">
+    <div className="space-y-5 max-[380px]:space-y-4">
+      <section className="space-y-3 max-[380px]:space-y-2">
         <div className="flex items-start justify-between gap-3">
           <div className="space-y-2">
-            <h1 className="font-display text-2xl font-semibold tracking-tight">
+            <h1 className="font-display text-2xl font-semibold tracking-tight max-[380px]:text-xl">
               The city's best samosas, plotted.
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground max-[380px]:text-xs">
               Tap a pin to read the place's story, then leave your honest 0–5
               rating. Your ratings build the average for everyone.
             </p>
@@ -217,13 +217,13 @@ export default function Home() {
       )}
 
       {isSelectingLocation && !isAddDialogOpen ? (
-        <div className="fixed bottom-[6.5rem] left-1/2 z-50 -translate-x-1/2 sm:bottom-8">
+        <div className="fixed bottom-[6.5rem] left-1/2 z-50 -translate-x-1/2 max-[380px]:bottom-[5.5rem] sm:bottom-8">
           <Button
             type="button"
             size="sm"
             onClick={() => void handleConfirmLocation()}
             disabled={isResolvingLocation}
-            className="gap-2 rounded-full px-4 py-2 shadow-xl shadow-primary/30"
+            className="gap-2 rounded-full px-4 py-2 text-sm shadow-xl shadow-primary/30 max-[380px]:px-3 max-[380px]:py-1.5 max-[380px]:text-xs"
           >
             {isResolvingLocation
               ? "Looking up location..."
@@ -236,7 +236,7 @@ export default function Home() {
       {selectedId != null && <Place overrideId={selectedId} />}
 
       <Dialog open={isAddDialogOpen} onOpenChange={handleAddDialogOpenChange}>
-        <DialogContent className="sm:max-w-xl">
+        <DialogContent className="sm:max-w-xl max-[380px]:w-[calc(100vw-1rem)] max-[380px]:p-4">
           <DialogHeader>
             <DialogTitle>Add a new place</DialogTitle>
             <DialogDescription>

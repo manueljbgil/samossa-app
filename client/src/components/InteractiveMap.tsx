@@ -275,8 +275,7 @@ export function InteractiveMap({
   return (
     <div
       ref={mapContainer}
-      className="relative w-full rounded-md border border-card-border overflow-hidden"
-      style={{ aspectRatio: "4 / 3" }}
+      className="relative w-full overflow-hidden rounded-md border border-card-border aspect-[3/2] xs:aspect-[4/3]"
       data-testid="map-interactive"
     >
       <div className="pointer-events-none absolute inset-0 bg-slate-950/10" />
@@ -293,7 +292,7 @@ export function InteractiveMap({
           <button
             key={marker.isPicked ? "picked-location" : marker.id}
             type="button"
-            className={`pointer-events-auto absolute h-4 w-4 rounded-full border-2 border-white shadow-lg transition-transform ${getMarkerClassName(marker)}`}
+            className={`pointer-events-auto absolute h-3.5 w-3.5 rounded-full border-2 border-white shadow-lg transition-transform xs:h-4 xs:w-4 ${getMarkerClassName(marker)}`}
             style={{
               left: `${marker.x}px`,
               top: `${marker.y}px`,
@@ -317,7 +316,7 @@ export function InteractiveMap({
         ))}
       </div>
       <ToastProvider>
-        <ToastViewport className="fixed bottom-4 left-1/2 -translate-x-1/2 w-auto max-w-[420px]" />
+        <ToastViewport className="fixed bottom-[calc(var(--app-floating-offset)+3.5rem)] left-1/2 -translate-x-1/2 w-auto max-w-[calc(100vw-1.5rem)] xs:max-w-[420px] sm:bottom-4" />
 
         <Toast open={toastOpen} onOpenChange={setToastOpen} duration={3000}>
           <div className="flex flex-col">
@@ -328,7 +327,7 @@ export function InteractiveMap({
         </Toast>
       </ToastProvider>
       {pickingLocation ? (
-        <div className="pointer-events-none absolute left-1/2 top-4 z-50 -translate-x-1/2 rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground shadow-lg backdrop-blur-sm">
+        <div className="pointer-events-none absolute left-1/2 top-3 z-50 -translate-x-1/2 rounded-full bg-background/90 px-2.5 py-0.5 text-[11px] font-medium text-foreground shadow-lg backdrop-blur-sm xs:top-4 xs:px-3 xs:py-1 xs:text-xs">
           Center the map on the location and confirm it.
         </div>
       ) : null}

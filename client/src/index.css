@@ -9,6 +9,27 @@
 */
 
 :root {
+  --app-shell-max-width: 48rem;
+  --app-page-gutter: 0.75rem;
+  --app-header-pad-x: 0.75rem;
+  --app-header-pad-y: 0.625rem;
+  --app-bottom-nav-width: calc(100% - 0.75rem);
+  --app-bottom-nav-max-width: 18rem;
+  --app-bottom-nav-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  --app-bottom-nav-pad: 0.25rem;
+  --app-bottom-nav-item-gap: 0.125rem;
+  --app-bottom-nav-item-pad-x: 0.5rem;
+  --app-bottom-nav-item-pad-y: 0.375rem;
+  --app-bottom-nav-item-font-size: 0.5625rem;
+  --app-bottom-nav-icon-size: 0.875rem;
+  --app-confirm-button-pad-x: 0.75rem;
+  --app-confirm-button-pad-y: 0.375rem;
+  --app-confirm-button-font-size: 0.75rem;
+  --app-main-bottom-space: calc(5.75rem + env(safe-area-inset-bottom));
+  --app-floating-offset: calc(5.75rem + env(safe-area-inset-bottom));
+  --app-detail-card-max-height: 58vh;
+  --app-detail-comments-height: 20vh;
+
   --button-outline: rgba(60, 30, 12, 0.12);
   --badge-outline: rgba(60, 30, 12, 0.06);
   --opaque-button-border-intensity: -8;
@@ -102,6 +123,79 @@
   );
 }
 
+@media (min-width: 380px) {
+  :root {
+    --app-page-gutter: 1rem;
+    --app-header-pad-x: 1rem;
+    --app-header-pad-y: 0.75rem;
+    --app-bottom-nav-width: calc(100% - 1rem);
+    --app-bottom-nav-max-width: 20rem;
+    --app-bottom-nav-bottom: max(1rem, env(safe-area-inset-bottom));
+    --app-bottom-nav-pad: 0.375rem;
+    --app-bottom-nav-item-gap: 0.125rem;
+    --app-bottom-nav-item-pad-x: 0.625rem;
+    --app-bottom-nav-item-pad-y: 0.5rem;
+    --app-bottom-nav-item-font-size: 0.625rem;
+    --app-bottom-nav-icon-size: 1rem;
+    --app-confirm-button-pad-x: 1rem;
+    --app-confirm-button-pad-y: 0.5rem;
+    --app-confirm-button-font-size: 0.875rem;
+    --app-main-bottom-space: calc(6.5rem + env(safe-area-inset-bottom));
+    --app-floating-offset: calc(6.5rem + env(safe-area-inset-bottom));
+    --app-detail-card-max-height: 56vh;
+    --app-detail-comments-height: 24vh;
+  }
+}
+
+@media (min-width: 430px) {
+  :root {
+    --app-bottom-nav-width: min(calc(100% - 1.25rem), 22rem);
+    --app-bottom-nav-max-width: 22rem;
+    --app-bottom-nav-item-pad-x: 0.875rem;
+  }
+}
+
+@media (max-height: 760px) and (orientation: landscape) {
+  :root {
+    --app-bottom-nav-width: min(calc(100% - 1rem), 18rem);
+    --app-bottom-nav-max-width: 18rem;
+    --app-bottom-nav-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    --app-bottom-nav-pad: 0.25rem;
+    --app-bottom-nav-item-gap: 0.0625rem;
+    --app-bottom-nav-item-pad-x: 0.5rem;
+    --app-bottom-nav-item-pad-y: 0.3125rem;
+    --app-bottom-nav-item-font-size: 0.5625rem;
+    --app-bottom-nav-icon-size: 0.8125rem;
+    --app-confirm-button-pad-x: 0.75rem;
+    --app-confirm-button-pad-y: 0.375rem;
+    --app-confirm-button-font-size: 0.75rem;
+    --app-main-bottom-space: calc(5rem + env(safe-area-inset-bottom));
+    --app-floating-offset: calc(5rem + env(safe-area-inset-bottom));
+    --app-detail-card-max-height: 48vh;
+    --app-detail-comments-height: 14vh;
+  }
+}
+
+@media (max-height: 760px) and (max-width: 639px) {
+  :root {
+    --app-confirm-button-pad-x: 0.75rem;
+    --app-confirm-button-pad-y: 0.375rem;
+    --app-confirm-button-font-size: 0.75rem;
+    --app-main-bottom-space: calc(5rem + env(safe-area-inset-bottom));
+    --app-floating-offset: calc(5rem + env(safe-area-inset-bottom));
+    --app-detail-card-max-height: 50vh;
+    --app-detail-comments-height: 16vh;
+  }
+}
+
+@media (min-width: 640px) {
+  :root {
+    --app-main-bottom-space: 0rem;
+    --app-floating-offset: 2rem;
+    --app-detail-card-max-height: min(70vh, 38rem);
+  }
+}
+
 .dark {
   --button-outline: rgba(255, 240, 220, 0.1);
   --badge-outline: rgba(255, 240, 220, 0.05);
@@ -190,6 +284,7 @@
     @apply font-sans antialiased bg-background text-foreground;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   .font-display {
