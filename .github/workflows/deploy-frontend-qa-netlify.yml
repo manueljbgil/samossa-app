@@ -25,10 +25,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.19.0
-          cache: npm
+
+      - name: Clear local caches
+        run: |
+          rm -rf node_modules dist
+          rm -rf ~/.npm/_cacache ~/.netlify
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --prefer-online --no-audit
 
       - name: Build frontend for QA
         run: npx vite build --mode development
@@ -50,7 +54,8 @@ jobs:
             --dir=dist/public \
             --site="$NETLIFY_QA_SITE_ID" \
             --alias=qa \
-            --message "QA deploy ${GITHUB_SHA}"
+            --message "QA deploy ${GITHUB_SHA}" \
+            --no-build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_QA_SITE_ID: ${{ secrets.NETLIFY_QA_SITE_ID }}
