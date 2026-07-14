@@ -1,0 +1,24 @@
+app = "samossa-api-qa"
+primary_region = "fra"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  APP_ENV = "development"
+  NODE_ENV = "production"
+  SERVE_CLIENT = "false"
+  PORT = "3000"
+  DATABASE_FILE = "/data/data.qa.db"
+
+[[mounts]]
+  source = "samossa_data_qa"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]

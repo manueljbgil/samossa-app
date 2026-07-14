@@ -2,6 +2,7 @@ import express, { Response, NextFunction } from "express";
 import type { Request } from "express";
 import { createServer } from "node:http";
 import { registerRoutes } from "./routes";
+import { env } from "./env";
 
 declare module "http" {
   interface IncomingMessage {
@@ -23,6 +24,50 @@ export function log(message: string, source = "express") {
 export async function createApiApp() {
   const app = express();
   const httpServer = createServer(app);
+
+  function isAllowedOrigin(origin: string): boolean {
+    const normalized = origin.replace(/\/$/, "");
+
+    if (env.corsAllowedOrigins.includes(normalized)) {
+      return true;
+    }
+
+    // In development mode, allow local frontend dev servers by default.
+    if (!env.isProduction) {
+      try {
+        const { hostname } = new URL(origin);
+        return (
+          hostname === "localhost" ||
+          hostname === "127.0.0.1" ||
+          hostname === "::1"
+        );
+      } catch {
+        return false;
+      }
+    }
+
+    return false;
+  }
+
+  app.use((req, res, next) => {
+    const origin = req.header("origin");
+
+    if (origin && isAllowedOrigin(origin)) {
+      res.header("Access-Control-Allow-Origin", origin);
+      res.header("Vary", "Origin");
+      res.header(
+        "Access-Control-Allow-Methods",
+        "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+      );
+      res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+
+    if (req.method === "OPTIONS") {
+      return res.status(204).end();
+    }
+
+    next();
+  });
 
   app.use(
     express.json({

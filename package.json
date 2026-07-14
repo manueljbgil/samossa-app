@@ -18,7 +18,9 @@
     "test:api": "vitest run --config vitest.api.config.ts",
     "test:api:watch": "vitest --config vitest.api.config.ts",
     "test:watch": "vitest",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "deploy:qa": "fly deploy -c fly.qa.toml",
+    "deploy:prod": "fly deploy -c fly.prod.toml"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

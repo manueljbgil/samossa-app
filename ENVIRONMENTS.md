@@ -108,3 +108,34 @@ Notes:
 
 - Keep a separate Google OAuth client id for QA vs production.
 - If your backend deploy is not webhook-based, you can remove `PROD_DEPLOY_WEBHOOK_URL` and align deploy steps to your backend platform.
+
+## 5) Backend deploy on Fly.io (QA + Production)
+
+Use separate Fly apps and volumes for QA and production:
+
+- QA config: `fly.qa.toml`
+- Production config: `fly.prod.toml`
+
+Recommended app names:
+
+- `samossa-api-qa`
+- `samossa-api-prod`
+
+Create volumes once:
+
+```bash
+fly volumes create samossa_data_qa --app samossa-api-qa --region fra --size 3
+fly volumes create samossa_data_prod --app samossa-api-prod --region fra --size 3
+```
+
+Deploy commands:
+
+```bash
+npm run deploy:qa
+npm run deploy:prod
+```
+
+Each environment has its own SQLite file:
+
+- QA: `/data/data.qa.db`
+- Production: `/data/data.prod.db`
